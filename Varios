@@ -1,0 +1,13 @@
+# Importar datos desde la fuente url
+library(readr)
+url_data <- "https://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.data"
+df <- read_csv(url_data,col_names = FALSE) # El set de datos no tiene encabezados
+
+# Estadísticas de valores vacíos
+colSums(is.na(df))
+# Estadísticas de valores con caracteres "?"
+colSums(df=="?")
+
+# Reemplazar el valor "?" por valores NA
+df$X1[df$X1=="?"] <- NA
+
