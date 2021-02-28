@@ -1,0 +1,21 @@
+# directorio de trabajo
+setwd('mi directorio')
+
+# nombres de archivos xls
+archivos <- list.files(pattern = 'xls')
+
+# lectura --- ver
+http://rwiki.sciviews.org/doku.php?id=tips:data-io:ms_windows
+require(gdata)
+informacion <- lapply(archivos, read.xls, header = TRUE) # lista con toda
+informacion
+
+# seleccion de las filas que necesito -- supongamos que requieres
+# las filas 3:10 y las columnas 2:10
+porcion <- lapply(informacion, function(l) l[1:3, 2:10])
+
+# colocando las listas en un data.frame
+out <- do.call(rbind, porcion)
+out
+
+#fuente: https://grokbase.com/t/r/r-help-es/11bytfjdf5/r-es-importar-simultaneamente-varios-archivos-excel
